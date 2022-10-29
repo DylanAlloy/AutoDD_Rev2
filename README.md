@@ -1,6 +1,6 @@
 ## About AutoDD Rev 2
 
-# DylanAlloy changes
+### DylanAlloy changes
 
 - Added setup.py
 - install via `pip install git+https://github.com/DylanAlloy/AutoDD_Rev2.git`
