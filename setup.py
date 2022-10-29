@@ -13,4 +13,6 @@ setup(
         'requests==2.25.1',
         'multitasking==0.0.9',
     ],
+    url = 'https://github.com/DylanAlloy/AutoDD_Rev2',  
+    download_url = 'https://github.com/DylanAlloy/AutoDD_Rev2/archive/v_100.tar.gz',
 )
