@@ -1,0 +1,9 @@
+[project]
+name = "AutoDD_rev2"
+version = "1.0.0"
+
+[tool.setuptools]
+# ...
+package-dir = {"" = "src"}
+    # directory containing all the packages (e.g.  src/mypkg1, src/mypkg2)
+

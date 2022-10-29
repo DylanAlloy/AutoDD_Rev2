@@ -3,8 +3,8 @@
 ### DylanAlloy changes
 
 - Added `setup.py`
-- install via `pip install git+https://github.com/DylanAlloy/AutoDD_Rev2.git`
-
+- install via git `pip install git+https://github.com/DylanAlloy/AutoDD_Rev2.git`
+- install [via pip](https://pypi.org/project/AutoDD-rev2/1.0.0/) `pip install AutoDD-rev2==1.0.0`
 AutoDD = Automatically does the "due diligence" for you. 
 If you want to know what stocks people are talking about on reddit, this little program might help you. 
 
