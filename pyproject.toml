@@ -1,6 +1,6 @@
 [project]
 name = "AutoDD_rev2"
-version = "1.0.0"
+version = "1.0.1"
 
 [tool.setuptools]
 # ...
