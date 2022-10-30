@@ -1,5 +1,5 @@
 [project]
-name = "AutoDD_rev2"
+name = "AutoDD"
 version = "1.0.1"
 
 [tool.setuptools]
