@@ -23,8 +23,11 @@ __author__ = "Fufu Fang kaito1410 Napo2k gobbedy"
 __copyright__ = "The GNU General Public License v3.0"
 
 import argparse
+import pandas as pd
 from AutoDD import *
 from collections import Counter
+
+from AutoDD.AutoDD import filter_df, get_financial_stats, get_submission_generators, populate_df, print_df
 
 def main():
     # Instantiate the parser
@@ -88,6 +91,3 @@ def main():
     results_df.sort_values(by=results_df.columns[args.sort - 1], inplace=True, ascending=False)
 
     print_df(results_df, args.filename, args.csv)
-
-if __name__ == '__main__':
-    main()

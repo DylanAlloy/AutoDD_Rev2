@@ -1,4 +1,4 @@
-import shared
+
 import requests
 import numbers
 import multitasking as multitasking
@@ -6,7 +6,10 @@ import time
 import math
 import pandas as pd
 
+response_dict={}
+
 def download_advanced_stats(symbol_list, module_name_map, threads=True):
+    global response_dict
     """
     Downloads advanced yahoo stats for many tickers by doing one request per ticker.
     """
@@ -20,15 +23,15 @@ def download_advanced_stats(symbol_list, module_name_map, threads=True):
         if threads:
             get_ticker_stats_threaded(symbol, symbol, module_name_map)
         else:
-            shared.response_dict[symbol] = get_ticker_stats(symbol, module_name_map)
+            response_dict[symbol] = get_ticker_stats(symbol, module_name_map)
 
     if threads:
-        while len(shared.response_dict) < num_requests:
+        while len(response_dict) < num_requests:
             time.sleep(0.01)
 
     # construct stats table from responses
     stats_table = []
-    for symbol, retrieved_modules_dict in shared.response_dict.items():
+    for symbol, retrieved_modules_dict in response_dict.items():
 
         stats_list = [symbol]
 
@@ -59,7 +62,7 @@ def download_advanced_stats(symbol_list, module_name_map, threads=True):
         stats_table.append(stats_list)
 
     # reset for future reuse
-    shared.response_dict = {}
+    response_dict = {}
 
     columns = ['Symbol']
     for stat_name_dict in module_name_map.values():
@@ -72,6 +75,7 @@ def download_advanced_stats(symbol_list, module_name_map, threads=True):
 
 
 def download_quick_stats(symbol_list, quick_stats_dict, threads=True):
+    global response_dict
     """
     Downloads select ("quick") stats for many tickers using minimal number of http requests. Splits the ticker list
     into groups of 1000 and performs one request per group. eg if list has 2350 tickers, will split into 2 groups of
@@ -102,15 +106,15 @@ def download_quick_stats(symbol_list, quick_stats_dict, threads=True):
         if threads:
             quick_stats_request_threaded(request_idx, request_symbol_list, list(quick_stats_dict.keys()))
         else:
-            shared.response_dict[request_idx] = quick_stats_request(request_symbol_list, list(quick_stats_dict.keys()))
+            response_dict[request_idx] = quick_stats_request(request_symbol_list, list(quick_stats_dict.keys()))
 
     if threads:
-        while len(shared.response_dict) < num_requests:
+        while len(response_dict) < num_requests:
             time.sleep(0.01)
 
     # construct stats table from responses
     stats_table = []
-    for response_list in shared.response_dict.values():
+    for response_list in response_dict.values():
         # each iteration is one symbol; (eg SIGL, AAPL)
         for retrieved_stats_dict in response_list:
             symbol = retrieved_stats_dict['symbol']
@@ -137,7 +141,7 @@ def download_quick_stats(symbol_list, quick_stats_dict, threads=True):
             stats_table.append(stats_list)
 
     # reset for future reuse
-    shared.response_dict = {}
+    response_dict = {}
 
     # construct dataframe
     columns = ['Symbol'] + list(quick_stats_dict.values())
@@ -148,9 +152,11 @@ def download_quick_stats(symbol_list, quick_stats_dict, threads=True):
 
 @multitasking.task
 def get_ticker_stats_threaded(request_idx, symbol, module_name_map):
-    shared.response_dict[request_idx] = get_ticker_stats(symbol, module_name_map)
+    global response_dict
+    response_dict[request_idx] = get_ticker_stats(symbol, module_name_map)
 
 def get_ticker_stats(symbol, module_name_map):
+    global response_dict
     """
     Returns advanced stats for one ticker
     """
@@ -160,7 +166,11 @@ def get_ticker_stats(symbol, module_name_map):
     params = {
         'modules': ','.join(module_list),
     }
-    result = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'My User Agent 1.0',
+        'From': 'youremail@domain.example'  # This is another valid field
+    }
+    result = requests.get(url, params=params, headers=headers)
     if result.status_code != 200 and result.status_code != 404:
         result.raise_for_status()
 
@@ -175,9 +185,11 @@ def get_ticker_stats(symbol, module_name_map):
 
 @multitasking.task
 def quick_stats_request_threaded(request_idx, request_symbol_list, field_list):
-    shared.response_dict[request_idx] = quick_stats_request(request_symbol_list, field_list)
+    global response_dict
+    response_dict[request_idx] = quick_stats_request(request_symbol_list, field_list)
 
 def quick_stats_request(request_symbol_list, field_list):
+    global response_dict
     """
     Returns quick stats for up to 1000 tickers in one request. Only returns those tickers that are valid, thus can be
     used to validate tickers efficiently.
@@ -187,7 +199,11 @@ def quick_stats_request(request_symbol_list, field_list):
         'symbols': ','.join(request_symbol_list),
         'fields': ','.join(field_list),
     }
-    result = requests.get("https://query1.finance.yahoo.com/v7/finance/quote", params=params)
+    headers = {
+        'User-Agent': 'My User Agent 1.0',
+        'From': 'youremail@domain.example'  # This is another valid field
+    }
+    result = requests.get("https://query2.finance.yahoo.com/v7/finance/quote", params=params, headers=headers)
     if result.status_code != 200 and result.status_code != 404:
         result.raise_for_status()
 

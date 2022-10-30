@@ -22,15 +22,17 @@ __author__ = "Fufu Fang kaito1410 Napo2k gobbedy"
 __copyright__ = "The GNU General Public License v3.0"
 
 # Native Python imports
+import math
 import os
 import sys
 import re
 import locale
 from datetime import datetime, timedelta
+import pandas as pd
+from AutoDD.fast_yahoo import download_advanced_stats, download_quick_stats
 from psaw import PushshiftAPI
 import praw
 from tabulate import tabulate
-from fast_yahoo import *
 
 # dictionary of possible subreddits to search in with their respective column name
 subreddit_dict = {'pennystocks': 'pnnystks',
