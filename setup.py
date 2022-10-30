@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='autodd',
-    version='1.0.1',
+    version='1.0.0',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[
