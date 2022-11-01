@@ -9,7 +9,7 @@ setup(
         'praw==7.1.4',
         'psaw==0.0.12',
         'pandas==1.2.1',
-        'tabulate==0.8.7',
+        'tabulate==0.9.0',
         'requests==2.25.1',
         'multitasking==0.0.9',
     ],
