@@ -158,7 +158,6 @@ def get_submission_generators(n, sub, allsub, use_psaw):
             print(sub)
             print("try switching to psaw")
         else: 
-            print("Searching for tickers...")
             current_scores, current_rocket_scores = get_ticker_scores_praw(recent)
             prev_scores, prev_rocket_scores = get_ticker_scores_praw(prev)  
 
