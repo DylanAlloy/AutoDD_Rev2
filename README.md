@@ -1,17 +1,17 @@
-## About AutoDD Rev 2.1.2
+## About AutoDD Rev 2.1.3
 
 ### DylanAlloy changes
 
 - Python 3.10 compat
 - Fixed YahooFinance 403
 - Fixed insecure Dict-in-file usage
-- install [via pip](https://pypi.org/project/AutoDD/2.1.2/) `pip install AutoDD==2.1.2`
+- install [via pip](https://pypi.org/project/AutoDD/2.1.3/) `pip install AutoDD==2.1.3`
 - Usage: `bash> autodd`
 - Developer import, can use as so (only behavior is `--allsubs` for API use-cases):
 
 	```
 	import AutoDD
-	json_results = AutoDD.main(True) # this arg indicates you are using as a submodule and expect only object returned
+	json_results = AutoDD.acquire(True) # this arg indicates you are using as a submodule and expect only object returned
 	``` 	
 
 AutoDD = Automatically does the "due diligence" for you. 
@@ -76,7 +76,7 @@ For Advanced Users:
 	
 	1. Simply open the terminal (powershell or command prompt on windows, terminal on linux/MacOSX) and navigate to the AutoDD folder, then type:
 		
-		python main.py -h
+		python acquire.py -h
 		
 	2. Follow the help document and set up the optional parameters as you'd like. 
 
@@ -126,11 +126,11 @@ Yahoo Option Output:
 
 In terminal, type:
 
-	python main.py -h
+	python acquire.py -h
 	
 This will produce the following help text:
 
-	usage: main.py [-h] [--interval [INTERVAL]] [--min [MIN]] [--adv] [--sub [SUB]] [--sort [SORT]] [--filename [FILENAME]]
+	usage: acquire.py [-h] [--interval [INTERVAL]] [--min [MIN]] [--adv] [--sub [SUB]] [--sort [SORT]] [--filename [FILENAME]]
 
 	AutoDD Optional Parameters
 
@@ -237,7 +237,7 @@ ModuleNotFoundError: No module named 'something'
 		
 	- Another possibility is that python is using the wrong version, try:
 		
-		python3 main.py
+		python3 acquire.py
 		
 AutoDD.py not found
 

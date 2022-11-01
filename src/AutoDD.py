@@ -505,7 +505,7 @@ def print_df(df, filename, writecsv, api):
     print("Wrote to file successfully: ")
     print(completeName)
 
-def main(imported=False):
+def acquire(imported=False):
     import argparse
     import json
     import pandas as pd

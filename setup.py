@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='autodd',
-    version='2.1.2',
+    version='2.1.3',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[
@@ -16,7 +16,7 @@ setup(
     url = 'https://github.com/DylanAlloy/AutoDD_Rev2',
     entry_points={
         'console_scripts': [
-            'autodd = AutoDD:main',
+            'autodd = AutoDD:acquire',
         ]
     }
 )
