@@ -1,11 +1,11 @@
-## About AutoDD Rev 2.1.3
+## About AutoDD Rev 2.1.4
 
 ### DylanAlloy changes
 
 - Python 3.10 compat
 - Fixed YahooFinance 403
 - Fixed insecure Dict-in-file usage
-- install [via pip](https://pypi.org/project/AutoDD/2.1.3/) `pip install AutoDD==2.1.3`
+- install [via pip](https://pypi.org/project/AutoDD/2.1.4/) `pip install AutoDD==2.1.4`
 - Usage: `bash> autodd`
 - Developer import, can use as so (only behavior is `--allsubs` for API use-cases):
 
