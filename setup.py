@@ -6,7 +6,7 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[
-        'praw==7.1.4',
+        'praw==7.6.0',
         'psaw==0.0.12',
         'pandas==1.2.1',
         'tabulate==0.9.0',
