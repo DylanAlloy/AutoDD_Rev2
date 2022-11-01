@@ -7,7 +7,7 @@
 - Fixed insecure Dict-in-file usage
 - install [via pip](https://pypi.org/project/AutoDD/2.1.2/) `pip install AutoDD==2.1.2`
 - Usage: `bash> autodd`
-- Developer import, can use as so (only behavior is --allsubs for API use-cases):
+- Developer import, can use as so (only behavior is `--allsubs` for API use-cases):
 
 	```
 	import AutoDD
