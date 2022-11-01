@@ -1,10 +1,10 @@
-## About AutoDD Rev 2.1.0
+## About AutoDD Rev 2.1.1
 
 ### DylanAlloy changes
 
 - Fixed YahooFinance 403
 - Fixed insecure Dict-in-file usage
-- install [via pip](https://pypi.org/project/AutoDD/2.1.0/) `pip install AutoDD==2.1.0`
+- install [via pip](https://pypi.org/project/AutoDD/2.1.1/) `pip install AutoDD==2.1.1`
 - Usage: `bash> autodd`
 
 AutoDD = Automatically does the "due diligence" for you. 
