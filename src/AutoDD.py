@@ -537,7 +537,7 @@ def main(imported=False):
                     help='Sort the results table by descending order of score, 1 = sort by total score, 2 = sort by recent score, 3 = sort by previous score, 4 = sort by change in score, 5 = sort by # of rocket emojis')
 
     parser.add_argument('--allsub', default=True, action='store_true',
-                    help='Using this parameter searchs from one subreddit only, default subreddit is r/pennystocks.')
+                    help='Using this parameter searchs from all subreddits.')
 
     parser.add_argument('--psaw', default=False, action='store_true',
                     help='Using this parameter selects psaw (push-shift) as the reddit scraper over praw (reddit-api)')

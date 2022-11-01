@@ -1,11 +1,18 @@
-## About AutoDD Rev 2.1.1
+## About AutoDD Rev 2.1.2
 
 ### DylanAlloy changes
 
+- Python 3.10 compat
 - Fixed YahooFinance 403
 - Fixed insecure Dict-in-file usage
-- install [via pip](https://pypi.org/project/AutoDD/2.1.1/) `pip install AutoDD==2.1.1`
+- install [via pip](https://pypi.org/project/AutoDD/2.1.2/) `pip install AutoDD==2.1.2`
 - Usage: `bash> autodd`
+- Developer import, can use as so (only behavior is --allsubs for API use-cases):
+
+	```
+	import AutoDD
+	json_results = AutoDD.main(True) # this arg indicates you are using as a submodule and expect only object returned
+	``` 	
 
 AutoDD = Automatically does the "due diligence" for you. 
 If you want to know what stocks people are talking about on reddit, this little program might help you. 
