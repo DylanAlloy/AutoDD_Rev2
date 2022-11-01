@@ -147,7 +147,6 @@ def get_submission_generators(n, sub, allsub, use_psaw):
     if use_psaw:
         recent, prev = get_submission_psaw(n, sub_dict)
 
-        print("Searching for tickers...")
         current_scores, current_rocket_scores = get_ticker_scores_psaw(recent)
         prev_scores, prev_rocket_scores = get_ticker_scores_psaw(prev)
     else:
