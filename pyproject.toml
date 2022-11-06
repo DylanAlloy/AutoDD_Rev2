@@ -1,6 +1,6 @@
 [project]
 name = "AutoDD"
-version = "2.1.4"
+version = "2.1.5"
 
 [project.scripts]
 autodd = "AutoDD:acquire"
