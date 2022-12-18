@@ -2,13 +2,13 @@ from setuptools import setup
 
 setup(
     name='autodd',
-    version='2.1.5',
+    version='2.1.6',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[
         'praw==7.6.0',
         'psaw==0.0.12',
-        'pandas==1.2.1',
+        'pandas==1.2.3',
         'tabulate==0.9.0',
         'requests==2.25.1',
         'multitasking==0.0.9',
