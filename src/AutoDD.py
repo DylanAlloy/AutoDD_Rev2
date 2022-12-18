@@ -31,7 +31,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 from fast_yahoo import download_advanced_stats, download_quick_stats
 from psaw import PushshiftAPI
-import praw
+import asyncpraw
 from tabulate import tabulate
 
 # dictionary of possible subreddits to search in with their respective column name
@@ -59,7 +59,7 @@ upvote_factor = 2
 rocket = '🚀'
 
 # =================================================================================================
-# praw credentials
+# asyncpraw credentials
 CLIENT_ID = "3RbFQX8O9UqDCA"
 CLIENT_SECRET = "NalOX_ZQqGWP4eYKZv6bPlAb2aWOcA"
 USER_AGENT = "subreddit_scraper"
@@ -78,14 +78,14 @@ def get_submission_praw(n, sub_dict):
     timestamp_start = int((mid_interval - timedelta(hours=n)).timestamp())
     timestamp_end = int(datetime.today().timestamp())
 
-    reddit = praw.Reddit(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, user_agent=USER_AGENT)
+    reddit = asyncpraw.Reddit(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, user_agent=USER_AGENT)
 
     recent = {}
     prev = {}
     for key in sub_dict:
         subreddit = reddit.subreddit(key)
         all_results = []
-        # praw limitation gets only 1000 posts
+        # asyncpraw limitation gets only 1000 posts
         for post in subreddit.new(limit=1000):
             all_results.append([post.title, post.link_flair_text, post.selftext, post.score, post.created_utc])
 
@@ -154,7 +154,7 @@ def get_submission_generators(n, sub, allsub, use_psaw):
         if recent and not prev:
             print('submission results were not found for the previous time period. This may be a popular subreddit with lots of submissions. Try reducing the time interval with the --interval parameter')
         elif not recent and not prev:
-            print("praw did not fetch any results for the sub: ")
+            print("asyncpraw did not fetch any results for the sub: ")
             print(sub)
             print("try switching to psaw")
         else: 
