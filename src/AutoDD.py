@@ -27,12 +27,14 @@ import os
 import sys
 import re
 import locale
+import configparser
 from datetime import datetime, timedelta
 import pandas as pd
 from fast_yahoo import download_advanced_stats, download_quick_stats
 from psaw import PushshiftAPI
 import asyncpraw
 from tabulate import tabulate
+config = configparser.ConfigParser()
 
 # dictionary of possible subreddits to search in with their respective column name
 subreddit_dict = {'pennystocks': 'pnnystks',
@@ -64,7 +66,7 @@ CLIENT_ID = "3RbFQX8O9UqDCA"
 CLIENT_SECRET = "NalOX_ZQqGWP4eYKZv6bPlAb2aWOcA"
 USER_AGENT = "subreddit_scraper"
 
-def get_submission_praw(n, sub_dict):
+async def get_submission_praw(n, sub_dict):
 
     """
     Returns a list of results for submission in past:
@@ -83,7 +85,7 @@ def get_submission_praw(n, sub_dict):
     recent = {}
     prev = {}
     for key in sub_dict:
-        subreddit = reddit.subreddit(key)
+        subreddit = await reddit.subreddit(key)
         all_results = []
         # asyncpraw limitation gets only 1000 posts
         for post in subreddit.new(limit=1000):
@@ -94,7 +96,7 @@ def get_submission_praw(n, sub_dict):
 
     return recent, prev
 
-def get_submission_psaw(n, sub_dict):
+async def get_submission_psaw(n, sub_dict):
 
     """
     Returns a list of results for submission in past:
@@ -125,7 +127,7 @@ def get_submission_psaw(n, sub_dict):
 
     return recent, prev
 
-def get_submission_generators(n, sub, allsub, use_psaw):
+async def get_submission_generators(n, sub, allsub, use_psaw):
 
     """
     Returns two dictionaries:
@@ -163,7 +165,7 @@ def get_submission_generators(n, sub, allsub, use_psaw):
 
     return current_scores, current_rocket_scores, prev_scores, prev_rocket_scores
 
-def get_ticker_scores_praw(sub_gen_dict):
+async def get_ticker_scores_praw(sub_gen_dict):
     """
     Return two dictionaries:
     --sub_scores_dict: a dictionary of dictionaries. This dictionaries' keys are the requested subreddit: all subreddits
@@ -228,7 +230,7 @@ def get_ticker_scores_praw(sub_gen_dict):
 
     return sub_scores_dict, rocket_scores_dict
 
-def get_ticker_scores_psaw(sub_gen_dict):
+async def get_ticker_scores_psaw(sub_gen_dict):
     """
     Return two dictionaries:
     --sub_scores_dict: a dictionary of dictionaries. This dictionaries' keys are the requested subreddit: all subreddits
@@ -296,7 +298,7 @@ def get_ticker_scores_psaw(sub_gen_dict):
 
     return sub_scores_dict, rocket_scores_dict
 
-def populate_df(current_scores_dict, prev_scores_dict, interval):
+async def populate_df(current_scores_dict, prev_scores_dict, interval):
     """
     Combine two score dictionaries, one from the current time interval, and one from the past time interval
     :returns: the populated dataframe
@@ -341,7 +343,7 @@ def populate_df(current_scores_dict, prev_scores_dict, interval):
 
     return df
 
-def filter_df(df, min_val):
+async def filter_df(df, min_val):
     """
     Filter the score dataframe
 
@@ -365,7 +367,7 @@ def filter_df(df, min_val):
     df = df.drop(index=drop_index)
     return df
 
-def get_financial_stats(results_df, threads=True, advanced=False, minprice=0, maxprice=99999999):
+async def get_financial_stats(results_df, threads=True, advanced=False, minprice=0, maxprice=99999999):
 
     # TODO: should be able to build the smarts so that a single dictionary necessary, and download_advanced_stats
     # function should be able to figure out which yahoo module the stat belongs to
@@ -405,7 +407,7 @@ def get_financial_stats(results_df, threads=True, advanced=False, minprice=0, ma
 
     return results_df
 
-def get_quick_stats(ticker_list, threads=True, minprice=0, maxprice=99999999):
+async def get_quick_stats(ticker_list, threads=True, minprice=0, maxprice=99999999):
 
     quick_stats = {'regularMarketPreviousClose': 'prvCls', 'fiftyDayAverage': '50DayAvg',
                    'regularMarketVolume': 'Volume', 'averageDailyVolume3Month': '3MonthVolAvg',
@@ -476,7 +478,7 @@ def get_quick_stats(ticker_list, threads=True, minprice=0, maxprice=99999999):
 
     return stats_df
 
-def print_df(df, filename, writecsv):
+async def print_df(df, filename, writecsv):
 
     # turn index (symbols) into regular column for printing purposes
     df.reset_index(inplace=True)
@@ -502,7 +504,7 @@ def print_df(df, filename, writecsv):
 
     print(completeName)
 
-def acquire(jsonify=False):
+async def acquire(jsonify=False):
     import json
     import pandas as pd
     from collections import Counter

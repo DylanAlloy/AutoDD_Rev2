@@ -17,6 +17,23 @@
 AutoDD = Automatically does the "due diligence" for you. 
 If you want to know what stocks people are talking about on reddit, this little program might help you. 
 
+# 🙋 Contribution 
+
+##### Proper commit message format is required for automated changelog generation. Examples:
+
+    [<emoji>] [revert: ?]<type>[(scope)?]: <message>
+
+    💥 feat(compiler): add 'comments' option
+    🐛 fix(compiler): fix some bug
+    📝 docs(compiler): add some docs
+    🌷 UI(compiler): better styles
+    🏰 chore(compiler): Made some changes to the scaffolding
+    🌐 locale(compiler): Made a small contribution to internationalization
+
+    Other commit types: refactor, perf, workflow, build, CI, typos, tests, types, wip, release, dep
+
+---
+
 Original author - Fufu Fang https://github.com/fangfufu
 
 Rev 2 Author - Steven Zhu https://github.com/kaito1410 gobbedy https://github.com/gobbedy Napo2k https://github.com/Napo2k 
