@@ -12,7 +12,7 @@
 	```
 	import AutoDD
 	json_results = AutoDD.acquire(True) # this arg indicates you are using as a submodule and expect only object returned
-	``` 	
+	```
 
 AutoDD = Automatically does the "due diligence" for you. 
 If you want to know what stocks people are talking about on reddit, this little program might help you. 
